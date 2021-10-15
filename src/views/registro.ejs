@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/usuario.css">
+    <title>Formulario</title>
+</head>
+
+<body style="background-color: <%= locals.bgColor ? bgColor : null %>;">
+    <% if (locals.nombre) {%>
+        <div>
+            <h1>Hola <%= nombre %>,<br>Elegiste el color: <%= color  %><br> Tu email es: <%= email  %><br> Tu edad es: <%= edad %></h1>
+        </div>
+        <div>
+            <h2>Ya te vas? <a href="/user/usuario">Click Aquí</a></h2>
+        </div>
+        <% } else { %> 
+    <h1>Formulario para usuarios</h1>
+    <form action="/user/register" method="POST">
+        <section>
+            <div>
+                <label for="nombre">Ingrese su nombre</label>
+                <input type="text" id="nombre" name="nombre" value="<%= locals.old && old.nombre ? old.nombre : null %>"> <br>
+                <small><%= locals.errors && errors.nombre ? errors.nombre.msg : null %></small>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div>
+                <select id="color" name="color">
+                    <option selected hidden value="">Seleccione un color</option>
+                    <option value="red" <%= locals.old && old.color === "red" ? "selected" : null %> >Rojo</option>
+                    <option value="blue" <%= locals.old && old.color === "blue" ? "selected" : null %> >Azul</option>
+                    <option value="yellow" <%= locals.old && old.color === "yellow" ? "selected" : null %> >Amarillo</option>
+                    <option value="grey" <%= locals.old && old.color === "grey" ? "selected" : null %> >Gris</option>
+                    <option value="orange" <%= locals.old && old.color === "orange" ? "selected" : null %> >Naranja</option>
+                    <option value="chocolate" <%= locals.old && old.color === "chocolate" ? "selected" : null %> >Chocolate</option>
+                    <option value="lime" <%= locals.old && old.color === "lime" ? "selected" : null %> >Lima</option>
+                    <option value="violet" <%= locals.old && old.color === "violet" ? "selected" : null %> >Violeta</option>
+                    <option value="olive" <%= locals.old && old.color === "olive" ? "selected" : null %> >Aceituna</option>
+                    <option value="pink" <%= locals.old && old.color === "pink" ? "selected" : null %> >Rosa</option>
+                </select>
+                <br>
+                <small><%= locals.errors && errors.color ? errors.color.msg : null %></small>
+            </div>
+            <br>
+            <br>
+                <div>
+                    <label for="recordarme">Recordar color</label>
+                    <input type="checkbox" name="recordarme" value="<%= locals.old && old.recordarme ? old.recordarme : null %>">
+                </div>
+            <br>
+            <br>
+            <br>
+            <div>
+                <label for="email">Ingrese su email</label>
+                <input type="email" name="email" value="<%= locals.old && old.email ? old.email : null %>"> <br>
+                <small><%= locals.errors && errors.email ? errors.email.msg : null %></small>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div>
+                <label for="edad">Ingrese su edad</label>
+                <input type="text" name="edad" value="<%= locals.old && old.edad ? old.edad : null %>"> <br>
+                <small><%= locals.errors && errors.edad ? errors.edad.msg : null %></small>
+            </div>
+            <br>
+            <br>
+            <br>
+            <button type="submit">Enviar</button>
+            <button type="reset">Borrar</button>
+            <br>
+            <br>
+            <a href="/user/destroy">Olvidar color</a>
+        </section>
+        <% } %> 
+    </form>
+</body>
+
+</html>
